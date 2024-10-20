@@ -19,7 +19,7 @@ jobs:
           sudo tailscale up --authkey=${{secrets.tailkey}} --advertise-tags=tag:git  --hostname=step2-1 --ssh
           wget https://downloads.mongodb.com/compass/mongodb-mongosh_2.3.2_amd64.deb -O app.deb && sudo apt install -y ./app.deb && rm -f ./app.deb
           wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2404-x86_64-100.10.0.deb  -O app.deb && sudo apt install -y ./app.deb && rm -f app.deb
-          mongoexport --uri="${{secrets.connection}}" --collection=domains -f "domain" --skip=0 --limit=1000000 --quiet  --assertExists --type=json  --jsonArray | jq -r '.[].domain' > domains.txt
+          mongoexport --uri="${{secrets.connection}}" --collection=domains -f "domain" --skip=0 --limit=100000 --quiet  --assertExists --type=json  --jsonArray | jq -r '.[].domain' > domains.txt
           wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O resolvers.txt
           wget -c https://github.com/d3mondev/puredns/releases/latest/download/puredns-Linux-amd64.tgz -O - | tar -xz
           git clone https://github.com/blechschmidt/massdns && cd massdns && make && sudo make install && cd ../ && rm -rf ./massdns
