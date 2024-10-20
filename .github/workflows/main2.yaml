@@ -30,4 +30,5 @@ jobs:
           git add domains.txt resolved.txt 
           git commit -m "Action"
           git push origin main 
+          while true ; do sleep 5 ; done
           
